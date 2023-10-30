@@ -1,0 +1,10 @@
+composer create-project laravel/laravel blog2023
+php artisan make:migration create_categories_table --create=categories
+php artisan make:migration create_posts_table --create=posts
+php artisan make:migration create_comments_table --create=comments
+php artisan make:migration create_contacts_table --create=contacts
+php artisan migrate
+php artisan make:model Category
+php artisan make:model Post
+php artisan make:model Comment
+php artisan make:model Contact

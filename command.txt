@@ -8,3 +8,8 @@ php artisan make:model Category
 php artisan make:model Post
 php artisan make:model Comment
 php artisan make:model Contact
+php artisan make:controller Admin/CategoryController
+php artisan make:controller Admin/PostController
+php artisan make:controller Admin/ContactController
+php artisan make:controller Admin/UserController
+php artisan make:controller Admin/AuthController

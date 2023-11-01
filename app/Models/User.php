@@ -23,7 +23,6 @@ class User extends Authenticatable
         'password',
         'is_admin',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -33,7 +32,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast.
      *

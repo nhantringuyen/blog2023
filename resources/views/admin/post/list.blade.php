@@ -5,33 +5,38 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Product
+                    <h1 class="page-header">Post
                         <small>List</small>
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr align="center">
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Date</th>
-                        <th>Status</th>
+                        <th>Title</th>
+                        <th>Image</th>
+                        <th>Category</th>
+                        <th>New post</th>
+                        <th>HighLight post</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" align="center">
-                        <td>1</td>
-                        <td>Áo Thun Nana</td>
-                        <td>200.000 VNĐ</td>
-                        <td>3 Minutes Age</td>
-                        <td>Hiện</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
+                    @foreach($posts as $post)
+                        <tr class="odd gradeX" align="center">
+                            <td>{{$post->id}}</td>
+                            <td>{{$post->title}}</td>
+                            <td></td>
+                            <td>{{$post->category->name}}</td>
+                            <td>{{$post->new_post == 1 ? 'x': ''}}</td>
+                            <td>{{$post->highlight_post == 1 ? 'x': ''}}</td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.post.delete',$post->id)}}"> Delete</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.post.update',$post->id)}}">Edit</a></td>
+                        </tr>
+                    @endforeach
+
                     <tr class="even gradeC" align="center">
                         <td>2</td>
                         <td>Áo Thun Polo</td>
@@ -43,6 +48,7 @@
                     </tr>
                     </tbody>
                 </table>
+                {!! $posts->links() !!}
             </div>
             <!-- /.row -->
         </div>

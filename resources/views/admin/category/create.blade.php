@@ -3,48 +3,45 @@
 @section('content')
     <div id="page-wrapper">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Category
-                        <small>Add</small>
-                    </h1>
+            <h1 class="page-header">Category
+                <small>Add</small>
+            </h1>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
+            @endif
+            <div class="row">
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="" method="POST">
+                    <form action="{{route('admin.category.store')}}" method="POST">
+                        @csrf
                         <div class="form-group">
-                            <label>Category Parent</label>
-                            <select class="form-control">
-                                <option value="0">Please Choose Category</option>
-                                <option value="">Tin Tức</option>
+                            <label for="parent">Category Parent</label>
+                            <select name="parent" id="parent" class="form-control">
+                                <option value="">Select Parent Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Category Name</label>
-                            <input class="form-control" name="txtCateName" placeholder="Please Enter Category Name" />
+                            <label for="txtCateName">Category Name</label>
+                            <input class="form-control" id="txtCateName" name="name" placeholder="Please Enter Category Name"/>
                         </div>
                         <div class="form-group">
-                            <label>Category Order</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Order" />
+                            <label for="txtOrder">Category Order</label>
+                            <input type="number" name="txtOrder" id="txtOrder" class="form-control" min="0" value="0">
                         </div>
                         <div class="form-group">
-                            <label>Category Keywords</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords" />
+                            <label for="description">Category Description</label>
+                            <textarea name="description" id="description" class="form-control"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Category Description</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Category Status</label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="1" checked="" type="radio">Visible
-                            </label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="2" type="radio">Invisible
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-default">Category Add</button>
+                        <button type="submit" class="btn btn-default">Create</button>
                         <button type="reset" class="btn btn-default">Reset</button>
                     </form>
                 </div>

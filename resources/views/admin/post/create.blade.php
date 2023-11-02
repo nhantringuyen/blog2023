@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Product
+                    <h1 class="page-header">Post
                         <small>Add</small>
                     </h1>
                 </div>
@@ -13,20 +13,29 @@
                 <div class="col-lg-7" style="padding-bottom:120px">
                     <form action="" method="POST">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input class="form-control" name="txtName" placeholder="Please Enter Username" />
+                            <label for="parent">Category</label>
+                            <select name="parent" id="parent" class="form-control">
+                                <option value="">Select Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Price</label>
-                            <input class="form-control" name="txtPrice" placeholder="Please Enter Password" />
+                            <label for="title">Title</label>
+                            <input class="form-control" name="title" id="title" placeholder="Please Enter Title" />
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input class="form-control" name="description" id="description" placeholder="Please Enter Description" />
                         </div>
                         <div class="form-group">
                             <label>Intro</label>
                             <textarea class="form-control" rows="3" name="txtIntro"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Content</label>
-                            <textarea class="form-control" rows="3" name="txtContent"></textarea>
+                            <label for="txtContent">Content</label>
+                            <textarea class="form-control" rows="3" name="txtContent" id="txtContent"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Images</label>

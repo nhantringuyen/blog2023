@@ -28,24 +28,14 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{$post->id}}</td>
                             <td>{{$post->title}}</td>
-                            <td></td>
+                            <td><img src="{{$post->imageUrl() }}" alt="" width="50"></td>
                             <td>{{$post->category->name}}</td>
                             <td>{{$post->new_post == 1 ? 'x': ''}}</td>
                             <td>{{$post->highlight_post == 1 ? 'x': ''}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.post.delete',$post->id)}}"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.post.update',$post->id)}}">Edit</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.post.edit',$post->id)}}">Edit</a></td>
                         </tr>
                     @endforeach
-
-                    <tr class="even gradeC" align="center">
-                        <td>2</td>
-                        <td>Áo Thun Polo</td>
-                        <td>250.000 VNĐ</td>
-                        <td>1 Hours Age</td>
-                        <td>Ẩn</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
                     </tbody>
                 </table>
                 {!! $posts->links() !!}

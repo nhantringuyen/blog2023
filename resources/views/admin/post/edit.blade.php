@@ -1,61 +1,70 @@
 @extends('admin.layout.master')
 
 @section('content')
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Product
-                        <small>Edit</small>
-                    </h1>
-                </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="" method="POST">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input class="form-control" name="txtName" placeholder="Please Enter Username" />
-                        </div>
-                        <div class="form-group">
-                            <label>Price</label>
-                            <input class="form-control" name="txtPrice" placeholder="Please Enter Password" />
-                        </div>
-                        <div class="form-group">
-                            <label>Intro</label>
-                            <textarea class="form-control" rows="3" name="txtIntro"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Content</label>
-                            <textarea class="form-control" rows="3" name="txtContent"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Images</label>
-                            <input type="file" name="fImages">
-                        </div>
-                        <div class="form-group">
-                            <label>Product Keywords</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords" />
-                        </div>
-                        <div class="form-group">
-                            <label>Product Description</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Product Status</label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="1" checked="" type="radio">Visible
-                            </label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="2" type="radio">Invisible
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-default">Product Edit</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
-                    </form>
-                </div>
-            </div>
-            <!-- /.row -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <h1 class="page-header">Post
+            <small>Edit</small>
+        </h1>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-        <!-- /.container-fluid -->
+        @endif
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{session('success')}}
+        </div>
+        @endif
+        <div class="row">
+            <!-- /.col-lg-12 -->
+            <div class="col-lg-7" style="padding-bottom:120px">
+                <form action="{{route('admin.post.update',$post->id)}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('put')
+                                        <div class="form-group">
+                        <label for="category_id">Category</label>
+                        <select name="category_id" id="category_id" class="form-control">
+                            <option value="">Select Category</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input class="form-control" name="title" id="title" value="{{$post->title}}" placeholder="Please Enter Title" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input class="form-control" name="description" id="description" value="{{$post->description}}" placeholder="Please Enter Description" />
+                    </div>
+                    <div class="form-group">
+                        <label>New post</label>
+                        <input type="checkbox"  name="new_post" {{$post->new_post ? 'checked' : ''}} >
+                    </div>
+                    <div class="form-group">
+                        <label>Highlight post</label>
+                        <input type="checkbox"  name="highlight_post" {{$post->highlight_post ? 'checked' : ''}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtContent">Content</label>
+                        <textarea class="form-control ckeditor" rows="3" name="txtContent" id="txtContent">{{$post->content}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Images</label>
+                        <input type="file" class="form-control" name="image" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-default">Update</button>
+                </form>
+            </div>
+        </div>
+        <!-- /.row -->
     </div>
+    <!-- /.container-fluid -->
+</div>
 @endsection

@@ -3,42 +3,55 @@
 @section('content')
     <div id="page-wrapper">
         <div class="container-fluid">
+            <h1 class="page-header">User
+                <small>Add</small>
+            </h1>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{session('success')}}
+            </div>
+            @endif
             <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">User
-                        <small>Add</small>
-                    </h1>
-                </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="" method="POST">
+                    <form action="{{route('admin.user.store')}}" method="POST">
+                        @csrf
                         <div class="form-group">
-                            <label>Username</label>
-                            <input class="form-control" name="txtUser" placeholder="Please Enter Username" />
+                            <label for="username">Name</label>
+                            <input class="form-control" name="name" id="username" placeholder="Please Enter Username" />
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control" name="txtPass" placeholder="Please Enter Password" />
+                            <label for="txtEmail">Email</label>
+                            <input type="email" class="form-control" name="email" id="txtEmail" placeholder="Please Enter Email" />
                         </div>
                         <div class="form-group">
-                            <label>RePassword</label>
-                            <input type="password" class="form-control" name="txtRePass" placeholder="Please Enter RePassword" />
+                            <label for="user-password">Password</label>
+                            <input type="password" class="form-control" id="user-password" name="password" placeholder="Please Enter Password" />
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" name="txtEmail" placeholder="Please Enter Email" />
+                            <label for="txtRePass">RePassword</label>
+                            <input type="password" class="form-control" id="txtRePass" name="txtRePass" placeholder="Please Enter RePassword" />
                         </div>
+
                         <div class="form-group">
-                            <label>User Level</label>
+                            <label>Role</label>
                             <label class="radio-inline">
-                                <input name="rdoLevel" value="1" checked="" type="radio">Admin
+                                <input name="is_admin" value="0" checked="" type="radio">User
                             </label>
                             <label class="radio-inline">
-                                <input name="rdoLevel" value="2" type="radio">Member
+                                <input name="is_admin" value="1" type="radio">Admin
                             </label>
                         </div>
                         <button type="submit" class="btn btn-default">User Add</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
                     </form>
                 </div>
             </div>

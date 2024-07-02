@@ -59,7 +59,8 @@ class Post extends Model
             ];
         }
     }
-    public static function message($id = null){
+    public static function message($id = null): array
+    {
         if($id == null) {
             return [
                 'title' => 'The title field is required.',

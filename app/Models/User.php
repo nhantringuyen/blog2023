@@ -46,4 +46,42 @@ class User extends Authenticatable
     {
       return $this->hasMany(Post::class);
     }
+    public static function rules($id = null): array
+    {
+        if($id == null) {
+            return [
+                'name'      => 'required',
+                'email'     => 'required|unique:users|email',
+                'password'  => 'required|min:6|max:32',
+                'txtRePass' => 'same:password',
+                'is_admin'  => 'required'
+            ];
+        }else{
+            return [
+                'name'      => 'required',
+                'email'     => 'required|unique:users|email',
+            ];
+        }
+    }
+    public static function message($id = null): array
+    {
+        if($id == null) {
+            return [
+                'name' => 'The name field is required.',
+                'email.required' => 'The email field is required.',
+                'email.unique' => 'The email field is unique.',
+                'password.required' => 'The password field is required.',
+                'password.min' => 'The password must be at least 6',
+                'password.max' => 'The password max length 32',
+                'txtRePass' => 'The txtRePass must be same password',
+                'is_admin' => 'The is_admin field is required.',
+            ];
+        }else{
+            return [
+                'name' => 'The name field is required.',
+                'email.required' => 'The email field is required.',
+                'email.unique' => 'The email field is unique.',
+            ];
+        }
+    }
 }

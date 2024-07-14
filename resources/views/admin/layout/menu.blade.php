@@ -49,4 +49,7 @@
         </ul>
         <!-- /.nav-second-level -->
     </li>
+    <li>
+        <a href="{{ route('admin.contact.index') }}"><i class="fa fa-phone fa-fw"></i> Contact</a>
+    </li>
 </ul>

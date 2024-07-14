@@ -59,7 +59,6 @@ class User extends Authenticatable
         }else{
             return [
                 'name'      => 'required',
-                'email'     => 'required|unique:users|email',
             ];
         }
     }

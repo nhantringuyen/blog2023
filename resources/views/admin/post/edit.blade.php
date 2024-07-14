@@ -26,7 +26,7 @@
                 <form action="{{route('admin.post.update',$post->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
-                                        <div class="form-group">
+                    <div class="form-group">
                         <label for="category_id">Category</label>
                         <select name="category_id" id="category_id" class="form-control">
                             <option value="">Select Category</option>

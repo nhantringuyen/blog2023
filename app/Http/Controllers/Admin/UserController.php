@@ -34,7 +34,7 @@ class UserController extends Controller
         return view('admin.user.edit', compact('user'));
     }
     public function update(Request $request,$id){
-        $this->validate($request,User::rules(),User::message());
+        $this->validate($request,User::rules($id),User::message());
         $user = User::find($id);
         $data = [
             'name' => $request->name,
@@ -49,5 +49,9 @@ class UserController extends Controller
         }
         $user->update($data);
         return redirect()->route('admin.user.edit',$user->id)->with('success','Update successfully');
+    }
+    public function delete($id){
+        User::find($id)->delete();
+        return redirect()->route('admin.user.index')->with('success','Delete successfully');
     }
 }

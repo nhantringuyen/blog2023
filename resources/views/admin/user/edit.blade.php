@@ -25,13 +25,14 @@
             <div class="col-lg-7" style="padding-bottom:120px">
                 <form action="{{route('admin.user.update', $user->id)}}" method="POST">
                     @csrf
+                    @method('put')
                     <div class="form-group">
                         <label for="username">Name</label>
                         <input class="form-control" name="name" value="{{$user->name}}" id="username" placeholder="Please Enter Username" />
                     </div>
                     <div class="form-group">
                         <label for="txtEmail">Email</label>
-                        <input type="email" class="form-control" name="email" value="{{$user->email}}" id="txtEmail" placeholder="Please Enter Email" />
+                        <input type="email" class="form-control" name="email" value="{{$user->email}}" id="txtEmail" placeholder="Please Enter Email" readonly />
                     </div>
                     <div class="form-group">
                         <label for="user-password">Password</label>
